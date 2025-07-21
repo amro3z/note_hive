@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_hive/helper/noteItem.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,19 +8,38 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notes' , style: TextStyle(fontSize: 24) , 
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: const Text(
+          'Notes',
+          style: TextStyle(
+            fontSize: 24,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500,
+          ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.search ,),
             onPressed: () {
               // Action for adding a new note
             },
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Welcome to the Notes Screen!'),
+      body: Center(
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return NoteItem(
+              title: 'Flutter Tip $index',
+              subtitle: 'Amr Hamouda',
+              time: DateTime.now(),
+              icon: Icons.delete,
+            );
+          },
+        ),
       ),
     );
   }
