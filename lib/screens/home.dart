@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_hive/helper/bootomSheet.dart';
+import 'package:note_hive/helper/bottomSheet.dart';
 import 'package:note_hive/helper/customAppBar.dart';
 import 'package:note_hive/helper/noteItem.dart';
 
