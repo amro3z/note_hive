@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_hive/base/customTestField.dart';
+import 'package:note_hive/base/custoomBottom.dart';
 
 class BottomSheetWidget {
   Future showAddNoteBottomSheet(BuildContext context) {
@@ -36,6 +37,8 @@ class BottomSheetWidget {
                   maxLines: 5,
                 ),
                 SizedBox(height: 20),
+                CustomBottom(title: "Save"),
+                SizedBox(height: 24),
               ],
             ),
           ),
