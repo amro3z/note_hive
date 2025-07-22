@@ -7,6 +7,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        onPressed: () {
+          // Action for adding a new note
+        },
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
@@ -21,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search ,),
+            icon: const Icon(Icons.search),
             onPressed: () {
               // Action for adding a new note
             },
