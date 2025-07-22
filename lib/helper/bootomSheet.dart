@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_hive/base/customTestField.dart';
-import 'package:note_hive/base/custoomBottom.dart';
+import 'package:note_hive/base/customBottom.dart';
 
 class BottomSheetWidget {
   Future showAddNoteBottomSheet(BuildContext context) {
