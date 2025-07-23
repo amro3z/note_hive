@@ -8,7 +8,7 @@ class AddCubitCubit extends Cubit<AddCubitState> {
   AddCubitCubit() : super(AddCubitInitial());
 
   addNote(NoteModel note) async {
-    var noteBox = Hive.box<NoteModel>('notes_box');
+    Box<NoteModel> noteBox = Hive.box<NoteModel>('notes_box');
     emit(AddCubitLoading());
     try {
       await noteBox.add(note);

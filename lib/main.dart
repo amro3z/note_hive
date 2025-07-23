@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:note_hive/cubits/addNoteCubit/cubit/add_cubit_cubit.dart';
 import 'package:note_hive/models/note_model.dart';
 import 'package:note_hive/route.dart';
 
@@ -15,10 +17,17 @@ class InitWidget extends StatelessWidget {
   final AppRoute appRoute;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: appRoute.generateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AddCubitCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: appRoute.generateRoute,
+      ),
     );
   }
 }
