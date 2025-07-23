@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:note_hive/base/route.dart';
+import 'package:note_hive/route.dart';
 
 void main() async {
   await Hive.initFlutter();

@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 
 class CustomBottom extends StatelessWidget {
   final String title;
-  const CustomBottom({super.key, required this.title});
+  final VoidCallback onPressed;
+  const CustomBottom({super.key, required this.title, required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.blue,
       ),
-      onPressed: () {
-        Navigator.pop(context); 
-      },
+      onPressed: onPressed,
       child: Text(
         title,
         style: TextStyle(

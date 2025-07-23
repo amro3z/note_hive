@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomFormTextField extends StatelessWidget {
   final String hintText;
   final Color? cursorColor;
   final Color? enabledBorderColor;
@@ -8,7 +8,9 @@ class CustomTextField extends StatelessWidget {
   final Color? disabledBorderColor;
   final TextEditingController? controller;
   final int? maxLines;
-  const CustomTextField({
+  final AutovalidateMode autovalidateMode;
+  final Function(String?) onSaved;
+  const CustomFormTextField({
     super.key,
     required this.hintText,
     this.cursorColor,
@@ -17,11 +19,21 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.disabledBorderColor,
     this.maxLines,
+    required this.autovalidateMode,
+    required this.onSaved,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onSaved,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter some text';
+        }
+        return null;
+      },
+      autovalidateMode: autovalidateMode,
       minLines: maxLines ?? 1,
       maxLines: null,
       decoration: InputDecoration(
