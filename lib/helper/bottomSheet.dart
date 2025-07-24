@@ -46,7 +46,10 @@ class BottomSheetWidget {
                     ),
                     blur: 1,
                     inAsyncCall: state is AddCubitLoading ? true : false,
-                    child: SingleChildScrollView(child: AddForm()),
+                    child: AbsorbPointer(
+                      absorbing: state is AddCubitLoading ? true : false,
+                      child: SingleChildScrollView(child: AddForm()),
+                    ),
                   ),
                 );
               },
