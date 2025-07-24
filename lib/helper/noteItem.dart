@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:note_hive/models/note_model.dart';
+import 'package:timeago/timeago.dart' as timeago;
 class NoteItem extends StatelessWidget {
   const NoteItem({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.time,
-    required this.icon, required this.pagePath,
+    required this.pagePath, required this.note,
   });
-  final String title;
-  final String subtitle;
-  final DateTime time;
-  final IconData icon;
   final String pagePath;
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +27,7 @@ class NoteItem extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  title,
+                  note.title,
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -43,7 +38,7 @@ class NoteItem extends StatelessWidget {
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    subtitle,
+                    note.description,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black87,
@@ -54,14 +49,16 @@ class NoteItem extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   onPressed: () {},
-                  icon: Icon(icon, color: Colors.black, size: 30),
+                  icon: Icon(Icons.delete, color: Colors.black, size: 30),
                 ),
               ),
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
                   textAlign: TextAlign.right,
-                  "${time.hour}:${time.minute}",
+                  // Format hour and minute with leading zero if needed (e.g., 08:07 instead of 8:7)
+                  //"${note.createdTime.hour.toString().padLeft(2, '0')}:${note.createdTime.minute.toString().padLeft(2, '0')}",
+                  timeago.format(note.createdTime),
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black54,

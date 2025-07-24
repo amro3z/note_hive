@@ -12,7 +12,8 @@ class LoadCubit extends Cubit<LoadState> {
     try {
       await Future.delayed(Duration(seconds: 2));
       var noteBox = Hive.box<NoteModel>('notes_box');
-      emit(LoadSuccess(notes: noteBox.values.toList()));
+    //because the note box returned the Notes as NoteModeL not a List to apply reversed on it
+      emit(LoadSuccess(notes: noteBox.values.toList().reversed.toList()));
     } catch (e) {
       emit(LoadFailure(message: e.toString()));
     }

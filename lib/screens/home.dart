@@ -39,10 +39,7 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final note = state.notes[index];
                       return NoteItem(
-                        title: note.title,
-                        subtitle: note.description,
-                        time: note.createdTime,
-                        icon: Icons.delete,
+                        note: note,
                         pagePath: '/editNote',
                       );
                     },
