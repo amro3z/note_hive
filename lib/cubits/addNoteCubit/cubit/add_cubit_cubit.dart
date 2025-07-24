@@ -22,7 +22,7 @@ class AddNoteCubit extends Cubit<AddCubitState> {
           title: note.title,
           description: note.description,
           createdTime: note.createdTime,
-          color: note.color,
+          color: 123,
         ),
       );
     } catch (e) {
