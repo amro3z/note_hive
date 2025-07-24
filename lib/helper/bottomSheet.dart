@@ -24,24 +24,30 @@ class BottomSheetWidget {
             right: 16,
             top: 16,
           ),
-          child: SingleChildScrollView(
-            child: BlocConsumer<AddNoteCubit, AddCubitState>(
-              listener: (context, state) {
-                if (state is AddCubitError) {
-                  log('Error: ${state.message}');
-                }
-                if (state is AddCubitSuccess) {
-                  log('Note added: ${state.title}');
-                  Navigator.pop(context);
-                }
-              },
-              builder: (context, state) {
-                return ModalProgressHUD(
+          child: BlocConsumer<AddNoteCubit, AddCubitState>(
+            listener: (context, state) {
+              if (state is AddCubitError) {
+                log('Error: ${state.message}');
+              }
+              if (state is AddCubitSuccess) {
+                log('Note added: ${state.title}');
+                Navigator.pop(context);
+              }
+            },
+            builder: (context, state) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.35,
+                child: ModalProgressHUD(
+                  color: Colors.transparent,
+                  progressIndicator: CircularProgressIndicator(
+                    color: Colors.green,
+                  ),
+                  blur: 1 ,
                   inAsyncCall: state is AddCubitLoading ? true : false,
-                  child: AddForm(title: title, description: description),
-                );
-              },
-            ),
+                  child: SingleChildScrollView(child: AddForm()),
+                ),
+              );
+            },
           ),
         );
       },

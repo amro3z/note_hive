@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_hive/base/CustomFormTextField.dart';
 import 'package:note_hive/base/customBottom.dart';
+import 'package:note_hive/cubits/addNoteCubit/cubit/add_cubit_cubit.dart';
+import 'package:note_hive/models/note_model.dart';
 
-// ignore: must_be_immutable
+
 class AddForm extends StatefulWidget {
-   AddForm({super.key, required this.title, required this.description});
-  String title;
-  String description;
+   const AddForm({super.key});
+
 
   @override
   State<AddForm> createState() => _AddFormState();
 }
 
 class _AddFormState extends State<AddForm> {
+  String title ='';
+  String description = '';
    AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
  
@@ -31,7 +35,7 @@ class _AddFormState extends State<AddForm> {
             focusedBorderColor: Colors.green,
             autovalidateMode: autovalidateMode,
             onSaved: (value) {
-              widget.title = value ?? '';
+              title = value ?? '';
             },
           ),
           SizedBox(height: 20),
@@ -43,7 +47,7 @@ class _AddFormState extends State<AddForm> {
             maxLines: 5,
             autovalidateMode: autovalidateMode,
             onSaved: (value) {
-               widget.description = value ?? '';
+               description = value ?? '';
             },
           ),
           SizedBox(height: 20),
@@ -52,8 +56,13 @@ class _AddFormState extends State<AddForm> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-        
-                Navigator.pop(context);
+                BlocProvider.of<AddNoteCubit>(context, listen: false)
+                    .addNote(NoteModel(
+                  title: title,
+                  description: description,
+                  createdTime: DateTime.now(),
+                  color: Colors.blue.value,
+                ));
               } else {
                 autovalidateMode = AutovalidateMode.always;
               }

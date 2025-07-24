@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:note_hive/cubits/addNoteCubit/cubit/add_cubit_cubit.dart';
+import 'package:note_hive/cubits/observer/simple_observer.dart';
 import 'package:note_hive/models/note_model.dart';
 import 'package:note_hive/route.dart';
 
 void main() async {
+   Bloc.observer = SimpleObserver();
   await Hive.initFlutter();
-  await Hive.openBox('notes_box');
   Hive.registerAdapter(NoteModelAdapter());
+  await Hive.openBox<NoteModel>('notes_box');
   runApp(InitWidget(appRoute: AppRoute()));
 }
 
