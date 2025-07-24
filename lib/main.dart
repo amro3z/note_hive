@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:note_hive/cubits/loadCubit/load_cubit.dart';
 import 'package:note_hive/cubits/observer/simple_observer.dart';
 import 'package:note_hive/models/note_model.dart';
 import 'package:note_hive/route.dart';
 
 void main() async {
-   Bloc.observer = SimpleObserver();
+  Bloc.observer = SimpleObserver();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
   await Hive.openBox<NoteModel>('notes_box');
@@ -18,11 +19,17 @@ class InitWidget extends StatelessWidget {
   final AppRoute appRoute;
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return BlocProvider(
+      create: (context) {
+        final cubit = LoadCubit();
+        cubit.fetchAllNotes();
+        return cubit;
+      },
+      child: MaterialApp(
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: appRoute.generateRoute,
-      );
-    
+      ),
+    );
   }
 }

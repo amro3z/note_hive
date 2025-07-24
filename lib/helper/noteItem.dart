@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:note_hive/cubits/loadCubit/load_cubit.dart';
 import 'package:note_hive/models/note_model.dart';
 import 'package:timeago/timeago.dart' as timeago;

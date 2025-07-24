@@ -19,37 +19,30 @@ class HomeScreen extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       appBar: CustomAppBar(title: 'Notes', leadingIcon: Icons.search),
-      body: BlocProvider(
-         create: (context) {
-          final cubit = LoadCubit();
-          cubit.fetchAllNotes(); // ✅ استدعاء تحميل البيانات
-          return cubit;
-        },
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: BlocBuilder<LoadCubit, LoadState>(
-              builder: (context, state) {
-                if (state is LoadInProgress) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is LoadSuccess) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(0),
-                    itemCount: state.notes.length,
-                    itemBuilder: (context, index) {
-                      final note = state.notes[index];
-                      return NoteItem(
-                        note: note,
-                        pagePath: '/editNote',
-                      );
-                    },
-                  );
-                } else if (state is LoadFailure) {
-                  return Center(child: Text('Error: ${state.message}'));
-                }
-                return Container();
-              },
-            ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: BlocBuilder<LoadCubit, LoadState>(
+            builder: (context, state) {
+              if (state is LoadInProgress) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is LoadSuccess) {
+                return ListView.builder(
+                  padding: const EdgeInsets.all(0),
+                  itemCount: state.notes.length,
+                  itemBuilder: (context, index) {
+                    final note = state.notes[index];
+                    return NoteItem(
+                      note: note,
+                      pagePath: '/editNote',
+                    );
+                  },
+                );
+              } else if (state is LoadFailure) {
+                return Center(child: Text('Error: ${state.message}'));
+              }
+              return Container();
+            },
           ),
         ),
       ),

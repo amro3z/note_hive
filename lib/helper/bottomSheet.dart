@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_hive/cubits/addNoteCubit/cubit/add_cubit_cubit.dart';
+import 'package:note_hive/cubits/loadCubit/load_cubit.dart';
 import 'package:note_hive/helper/addForm.dart';
 
 class BottomSheetWidget {
@@ -33,6 +34,8 @@ class BottomSheetWidget {
                 }
                 if (state is AddCubitSuccess) {
                   log('Note added: ${state.title}');
+                  final cubit = context.read<LoadCubit>();
+                  cubit.fetchAllNotes();
                   Navigator.pop(context);
                 }
               },
