@@ -4,8 +4,8 @@ import 'package:note_hive/models/note_model.dart';
 
 part 'add_cubit_state.dart';
 
-class AddCubitCubit extends Cubit<AddCubitState> {
-  AddCubitCubit() : super(AddCubitInitial());
+class AddNoteCubit extends Cubit<AddCubitState> {
+  AddNoteCubit() : super(AddCubitInitial());
 
   addNote(NoteModel note) async {
     Box<NoteModel> noteBox = Hive.box<NoteModel>('notes_box');

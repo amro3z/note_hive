@@ -1,4 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:note_hive/cubits/addNoteCubit/cubit/add_cubit_cubit.dart';
 import 'package:note_hive/helper/addForm.dart';
 
 class BottomSheetWidget {
@@ -10,9 +15,34 @@ class BottomSheetWidget {
       isScrollControlled:
           true, // 👈 ضروري علشان البوتوم شيت يبقى مرن مع الكيبورد
       builder: (context) {
-        return AddForm (
-          title: title,
-          description: description,
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(
+              context,
+            ).viewInsets.bottom, // 👈 علشان يتحرك مع الكيبورد
+            left: 16,
+            right: 16,
+            top: 16,
+          ),
+          child: SingleChildScrollView(
+            child: BlocConsumer<AddNoteCubit, AddCubitState>(
+              listener: (context, state) {
+                if (state is AddCubitError) {
+                  log('Error: ${state.message}');
+                }
+                if (state is AddCubitSuccess) {
+                  log('Note added: ${state.title}');
+                  Navigator.pop(context);
+                }
+              },
+              builder: (context, state) {
+                return ModalProgressHUD(
+                  inAsyncCall: state is AddCubitLoading ? true : false,
+                  child: AddForm(title: title, description: description),
+                );
+              },
+            ),
+          ),
         );
       },
     );

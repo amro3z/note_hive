@@ -20,7 +20,7 @@ class InitWidget extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AddCubitCubit(),
+          create: (context) => AddNoteCubit(),
         ),
       ],
       child: MaterialApp(
