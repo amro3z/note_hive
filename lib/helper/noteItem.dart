@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:note_hive/cubits/loadCubit/load_cubit.dart';
 import 'package:note_hive/models/note_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
 class NoteItem extends StatelessWidget {
-  const NoteItem({
-    super.key,
-    required this.pagePath, required this.note,
-  });
+  const NoteItem({super.key, required this.pagePath, required this.note});
   final String pagePath;
   final NoteModel note;
   @override
@@ -48,7 +49,16 @@ class NoteItem extends StatelessWidget {
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    // Delete the note from Hive
+                    await note.delete(); // ✅ حذف النوت من Hive
+                    final cubit = context.read<LoadCubit>();
+                    cubit.fetchAllNotes();
+                    // Show a snackbar to confirm deletion
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('Note deleted')));
+                  },
                   icon: Icon(Icons.delete, color: Colors.black, size: 30),
                 ),
               ),
@@ -58,6 +68,7 @@ class NoteItem extends StatelessWidget {
                   textAlign: TextAlign.right,
                   // Format hour and minute with leading zero if needed (e.g., 08:07 instead of 8:7)
                   //"${note.createdTime.hour.toString().padLeft(2, '0')}:${note.createdTime.minute.toString().padLeft(2, '0')}",
+                  //there is another way using intl package
                   timeago.format(note.createdTime),
                   style: TextStyle(
                     fontSize: 16,
