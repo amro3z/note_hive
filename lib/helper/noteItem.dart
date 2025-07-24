@@ -54,9 +54,26 @@ class NoteItem extends StatelessWidget {
                     final cubit = context.read<LoadCubit>();
                     cubit.fetchAllNotes();
                     // Show a snackbar to confirm deletion
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text('Note deleted')));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Note deleted',
+                          style: TextStyle(fontFamily: 'Poppins', fontSize: 16 ,fontWeight: FontWeight.w500, color: Colors.white),
+                        ),
+                        duration: Duration(seconds: 2),
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        animation: CurvedAnimation(
+                          parent: AnimationController(
+                            vsync: Scaffold.of(context),
+                            duration: Duration(milliseconds: 300),
+                          ),
+                          curve: Curves.easeInOut,
+                      ),
+                      )
+                    );
                   },
                   icon: Icon(Icons.delete, color: Colors.black, size: 30),
                 ),
