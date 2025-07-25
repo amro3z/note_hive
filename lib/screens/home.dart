@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                     final note = state.notes[index];
                     return NoteItem(
                       note: note,
-                      pagePath: '/editNote',
+                      pagePath: '/viewNote',
                     );
                   },
                 );

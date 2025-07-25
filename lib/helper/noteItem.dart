@@ -15,13 +15,13 @@ class NoteItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: Colors.yellow,
-          border: Border.all(color: Colors.yellow, width: 1),
+          color: Color(note.color),
+          border: Border.all(color: Color(note.color), width: 1),
           borderRadius: BorderRadius.circular(8),
         ),
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, pagePath , arguments: note);
+            Navigator.pushNamed(context, pagePath, arguments: note);
           },
           child: Column(
             children: [
@@ -45,6 +45,9 @@ class NoteItem extends StatelessWidget {
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500,
                     ),
+                    maxLines: 1, //  show only one line
+                    overflow:
+                        TextOverflow.ellipsis, //  show ... if text is too long
                   ),
                 ),
                 trailing: IconButton(
@@ -58,7 +61,12 @@ class NoteItem extends StatelessWidget {
                       SnackBar(
                         content: Text(
                           'Note deleted',
-                          style: TextStyle(fontFamily: 'Poppins', fontSize: 16 ,fontWeight: FontWeight.w500, color: Colors.white),
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
                         ),
                         duration: Duration(seconds: 2),
                         backgroundColor: Colors.black,
@@ -71,8 +79,8 @@ class NoteItem extends StatelessWidget {
                             duration: Duration(milliseconds: 300),
                           ),
                           curve: Curves.easeInOut,
+                        ),
                       ),
-                      )
                     );
                   },
                   icon: Icon(Icons.delete, color: Colors.black, size: 30),

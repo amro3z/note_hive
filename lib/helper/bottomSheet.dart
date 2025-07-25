@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -10,19 +9,20 @@ import 'package:note_hive/helper/addForm.dart';
 class BottomSheetWidget {
   String title = '';
   String description = '';
+
   Future showAddNoteBottomSheet(BuildContext context) async {
     return await showModalBottomSheet(
       context: context,
-      isScrollControlled:
-          true, // 👈 ضروري علشان البوتوم شيت يبقى مرن مع الكيبورد
+      isScrollControlled: true, // ضروري علشان البوتوم شيت يتحرك مع الكيبورد
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
       builder: (context) {
         return BlocProvider(
           create: (context) => AddNoteCubit(),
           child: Padding(
             padding: EdgeInsets.only(
-              bottom: MediaQuery.of(
-                context,
-              ).viewInsets.bottom, // 👈 علشان يتحرك مع الكيبورد
+              bottom: MediaQuery.of(context).viewInsets.bottom,
               left: 16,
               right: 16,
               top: 16,
@@ -34,24 +34,25 @@ class BottomSheetWidget {
                 }
                 if (state is AddCubitSuccess) {
                   log('Note added: ${state.title}');
-                  final cubit = context.read<LoadCubit>();
-                  cubit.fetchAllNotes();
+                  context.read<LoadCubit>().fetchAllNotes();
                   Navigator.pop(context);
                 }
               },
               builder: (context, state) {
                 return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.35,
+                  height: MediaQuery.of(context).size.height * 0.45,
                   child: ModalProgressHUD(
                     color: Colors.transparent,
                     progressIndicator: CircularProgressIndicator(
                       color: Colors.green,
                     ),
                     blur: 1,
-                    inAsyncCall: state is AddCubitLoading ? true : false,
+                    inAsyncCall: state is AddCubitLoading,
                     child: AbsorbPointer(
-                      absorbing: state is AddCubitLoading ? true : false,
-                      child: SingleChildScrollView(child: AddForm()),
+                      absorbing: state is AddCubitLoading,
+                      child: SingleChildScrollView(
+                        child: AddForm(), // ← ده الفورم بتاعك
+                      ),
                     ),
                   ),
                 );
