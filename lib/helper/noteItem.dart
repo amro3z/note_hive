@@ -21,7 +21,7 @@ class NoteItem extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, pagePath);
+            Navigator.pushNamed(context, pagePath , arguments: note);
           },
           child: Column(
             children: [

@@ -10,6 +10,7 @@ class CustomFormTextField extends StatelessWidget {
   final int? maxLines;
   final AutovalidateMode autovalidateMode;
   final Function(String?) onSaved;
+  final Function(String?)? onChange;
   const CustomFormTextField({
     super.key,
     required this.hintText,
@@ -20,12 +21,13 @@ class CustomFormTextField extends StatelessWidget {
     this.disabledBorderColor,
     this.maxLines,
     required this.autovalidateMode,
-    required this.onSaved,
+    required this.onSaved,  this.onChange,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChange,
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {

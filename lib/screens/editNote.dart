@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:note_hive/base/CustomFormTextField.dart';
 import 'package:note_hive/base/customBottom.dart';
+import 'package:note_hive/constant.dart';
 import 'package:note_hive/helper/customAppBar.dart';
+import 'package:note_hive/models/note_model.dart';
 
 class EditNoteScreen extends StatefulWidget {
-  const EditNoteScreen({super.key});
-
+  const EditNoteScreen({super.key, required this.note});
+  final NoteModel note;
   @override
   State<EditNoteScreen> createState() => _EditNoteScreenState();
 }
@@ -13,8 +15,7 @@ class EditNoteScreen extends StatefulWidget {
 class _EditNoteScreenState extends State<EditNoteScreen> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String editTitle = '';
-  String editDescription = '';
+  String? editTitle, editDescription;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,13 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
         title: 'Edit Note',
         leadingIcon: Icons.check,
         onLeadingPressed: () {
-          Navigator.pop(context);
+          submitTheChange(
+            note: widget.note,
+            editTitle: editTitle,
+            editDescription: editDescription,
+            context: context,
+          );
+         
         },
       ),
       body: Padding(
@@ -34,6 +41,9 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
             child: Column(
               children: [
                 CustomFormTextField(
+                  onChange: (value) {
+                    editTitle = value;
+                  },
                   hintText: 'Title',
                   cursorColor: Colors.blue,
                   enabledBorderColor: Colors.blue,
@@ -45,6 +55,9 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                 ),
                 SizedBox(height: 20),
                 CustomFormTextField(
+                  onChange: (value) {
+                    editDescription = value;
+                  },
                   hintText: 'Description',
                   cursorColor: Colors.blue,
                   enabledBorderColor: Colors.blue,
@@ -59,14 +72,12 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                 CustomBottom(
                   title: "Save",
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      Navigator.pop(context);
-                    } else {
-                      setState(() {
-                        autovalidateMode = AutovalidateMode.always;
-                      });
-                    }
+                    submitTheChange(
+                      note: widget.note,
+                      editTitle: editTitle,
+                      editDescription: editDescription,
+                      context: context,
+                    );
                   },
                 ),
                 SizedBox(height: 24),
