@@ -44,7 +44,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   onChange: (value) {
                     editTitle = value;
                   },
-                  hintText: 'Title',
+                  hintText: widget.note.title,
                   cursorColor: Colors.blue,
                   enabledBorderColor: Colors.blue,
                   focusedBorderColor: Colors.green,
@@ -58,7 +58,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   onChange: (value) {
                     editDescription = value;
                   },
-                  hintText: 'Description',
+                  hintText: widget.note.description,
                   cursorColor: Colors.blue,
                   enabledBorderColor: Colors.blue,
                   focusedBorderColor: Colors.green,
