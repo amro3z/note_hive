@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_hive/cubits/loadCubit/load_cubit.dart';
-import 'package:note_hive/helper/bottomSheet.dart';
-import 'package:note_hive/helper/customAppBar.dart';
-import 'package:note_hive/helper/noteItem.dart';
+import 'package:note_hive/helper/bottom_sheet.dart';
+import 'package:note_hive/helper/custom_app_bar.dart';
+import 'package:note_hive/helper/note_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,14 +18,17 @@ class HomeScreen extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-      appBar: CustomAppBar(title: 'Notes', leadingIcon: Icons.search),
+      appBar: CustomAppBar(title: 'Notes'),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           child: BlocBuilder<LoadCubit, LoadState>(
             builder: (context, state) {
               if (state is LoadInProgress) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator(
+                  color: Colors.green,
+                  
+                ));
               } else if (state is LoadSuccess) {
                 return ListView.builder(
                   padding: const EdgeInsets.all(0),

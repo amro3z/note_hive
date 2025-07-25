@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_hive/base/CustomFormTextField.dart';
-import 'package:note_hive/base/customBottom.dart';
+import 'package:note_hive/base/custom_form_textfield.dart';
+import 'package:note_hive/base/custom_bottom.dart';
 import 'package:note_hive/constant.dart';
-import 'package:note_hive/helper/customAppBar.dart';
+import 'package:note_hive/helper/custom_app_bar.dart';
 import 'package:note_hive/models/note_model.dart';
 
 class EditNoteScreen extends StatefulWidget {

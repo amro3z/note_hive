@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_hive/cubits/loadCubit/load_cubit.dart';
-import 'package:note_hive/helper/customAppBar.dart';
+import 'package:note_hive/helper/custom_app_bar.dart';
 import 'package:note_hive/models/note_model.dart';
 
 class ViewNote extends StatefulWidget {

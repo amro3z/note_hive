@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final IconData leadingIcon;
+  final IconData? leadingIcon;
   final VoidCallback? onLeadingPressed;
   const CustomAppBar({
     super.key,
     required this.title,
-    required this.leadingIcon,
+     this.leadingIcon,
     this.onLeadingPressed,
   });
 

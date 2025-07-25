@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:note_hive/base/CustomFormTextField.dart';
-import 'package:note_hive/base/customBottom.dart';
+import 'package:note_hive/base/custom_form_textfield.dart';
+import 'package:note_hive/base/custom_bottom.dart';
 import 'package:note_hive/base/list_of_color.dart';
 import 'package:note_hive/cubits/addNoteCubit/cubit/add_cubit_cubit.dart';
 import 'package:note_hive/models/note_model.dart';

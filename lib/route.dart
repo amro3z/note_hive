@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_hive/models/note_model.dart';
-import 'package:note_hive/screens/editNote.dart';
+import 'package:note_hive/screens/edit_note.dart';
 import 'package:note_hive/screens/home.dart';
 import 'package:note_hive/screens/view_note.dart';
 
